@@ -154,7 +154,7 @@ function Sidebar() {
       {/* Overlay when sidebar is open */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-[100]"
+          className="fixed inset-0 h-[100vh] bg-black opacity-50 z-[20]"
           onClick={closeSidebar} // Close sidebar on overlay click
         />
       )}

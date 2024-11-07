@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export default function ContactUs() {
   return (
-    <div className="container mx-auto my-16 p-6 md:p-10 bg-white rounded-lg">
+    <div className="container mx-auto my-24 p-6 md:p-10 bg-white rounded-lg">
       <h1 className="text-4xl font-bold text-center mb-6 text-gray-900">
         Connect with Us
       </h1>
