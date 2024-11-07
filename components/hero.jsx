@@ -18,7 +18,7 @@ import Image from 'next/image'
 import TalkToUsBTN from './TalkToUsBTN';
 import { getHeroImages } from '@/lib/contentful';
 import { Skeleton } from './ui/skeleton';
-function hero() {
+function Hero() {
   const [images,setImages] = useState([])
   useEffect(()=>{
     async function get(){
@@ -69,4 +69,4 @@ function hero() {
   )
 }
 
-export default hero
+export default Hero
