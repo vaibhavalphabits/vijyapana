@@ -43,8 +43,8 @@ function Hero() {
         delay: 3000,
       }),]} className="h-screen mt-[106px] md:mt-[64px] border">
   <CarouselContent>
-    {images.map((img)=>{
-      return <CarouselItem >
+    {images.map((img,idx)=>{
+      return <CarouselItem key={idx}>
       <div className='h-screen relative '>
       <Image 
   src={img} 
