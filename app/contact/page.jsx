@@ -78,10 +78,10 @@ export default function ContactUs() {
           {/* Contact Details */}
           <div className="mt-10 text-gray-600 space-y-3">
             <p>
-              <strong>Support Email:</strong> support@example.com
+              <strong>Support Email:</strong> support@vijyapana.com
             </p>
             <p>
-              <strong>WhatsApp:</strong> +123456789
+              <strong>WhatsApp:</strong> +91 9889519102
             </p>
             <p>
               <strong>Contact No:</strong> +123456789

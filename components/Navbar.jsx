@@ -91,7 +91,7 @@ function Navbar() {
         <div className="right flex gap-x-4">
       
       <Link href={"/contact"}><IoCallSharp className='h-4 w-4'/></Link>
-      <IoLogoWhatsapp className='h-4 w-4'/>
+      <Link href={`https://wa.me/<919889519102>?text=Hello!%20I'd%20like%20to%20inquire%20about%20your%20services`}><IoLogoWhatsapp className='h-4 w-4'/></Link>
       </div>
         </div>
        
@@ -101,7 +101,7 @@ function Navbar() {
       </div>
       <div className="right flex gap-x-4">
       <Link href={"/contact"}><IoCallSharp className='h-4 w-4'/></Link>
-      <IoLogoWhatsapp className='h-4 w-4'/>
+      <Link href={`https://wa.me/<919889519102>?text=Hello!%20I'd%20like%20to%20inquire%20about%20your%20services`}><IoLogoWhatsapp className='h-4 w-4'/></Link>
       </div>
     </nav>
     </Container>
