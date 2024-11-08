@@ -25,7 +25,7 @@ function Index() {
         <div className='w-full md:w-1/2 text-2xl'>
         <p className='text-center mb-4 '>Social Links</p>
         <div className='flex justify-center gap-x-16'>
-          {soicalLinks.map((soc)=>{return <Link href={soc.link}>{soc.icon}</Link>})}
+          {soicalLinks.map((soc)=>{return <Link key={soc.id} href={soc.link}>{soc.icon}</Link>})}
     
     </div>
     </div>
