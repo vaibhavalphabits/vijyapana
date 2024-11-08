@@ -73,12 +73,16 @@ export default function MarqueeCards() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div 
-        className={`flex animate-marquee`} //${isPaused ? '' : 'animate-marquee'}
+        className={`inline-flex animate-marquee`} //${isPaused ? '' : 'animate-marquee'}
         // style={{ animationPlayState: isPaused ? 'running' : 'running' }}
       >
         {services.map((card, index) => (
           <MarqueeCard key={`${card.id}-${index}`} title={card.name} images={card.images} />
         ))}
+        {services.map((card, index) => (
+          <MarqueeCard key={`${card.id}-${index}`} title={card.name} images={card.images} />
+        ))}
+        
       </div>
     </div>
   )
