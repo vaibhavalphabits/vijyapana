@@ -74,7 +74,7 @@ export default function MarqueeCards() {
     >
       <div 
         className={`inline-flex animate-marquee`} //${isPaused ? '' : 'animate-marquee'}
-        // style={{ animationPlayState: isPaused ? 'running' : 'running' }}
+        style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
       >
         {services.map((card, index) => (
           <MarqueeCard key={`${card.id}-${index}`} title={card.name} images={card.images} />
