@@ -10,7 +10,7 @@ export default function Home() {
     
     <Hero/>
 <Products/>
-   <Imgtext text={"We understand your needs ."}/>
+   <Imgtext text={"We have perfect solution for every Business needs."}/>
     <Services/>
     <ImageSlideShow/>
     </>
