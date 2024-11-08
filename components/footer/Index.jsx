@@ -4,13 +4,29 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import Container from '../container';
+import Link from 'next/link';
+
+const soicalLinks = [
+  { 
+    id:1,
+    icon:<FaInstagram/>,
+    link:"https://www.instagram.com/vijyapana"
+  },
+  { 
+    id:2,
+    icon:<FaLinkedin/>,
+    link:"https://www.linkedin.com/in/vijyapana-advertisements-1b119832b/"
+  },
+  
+]
 function Index() {
   return (<Container>
     <footer className='flex flex-col md:flex-row mt-24 pt-12 border-t-2 cursor-pointer'>
         <div className='w-full md:w-1/2 text-2xl'>
         <p className='text-center mb-4 '>Social Links</p>
         <div className='flex justify-center gap-x-16'>
-    <FaInstagram className='hover:opacity-45 transition-opacity duration-500'/> <FaFacebookSquare className='hover:opacity-45 transition-opacity duration-500'/> <FaLinkedin className='hover:opacity-45 transition-opacity duration-500'/>
+          {soicalLinks.map((soc)=>{return <Link href={soc.link}>{soc.icon}</Link>})}
+    
     </div>
     </div>
     <div className='flex justify-center items-center mt-8 text-center md:w-1/2  md:mt-0 text-xl'>
