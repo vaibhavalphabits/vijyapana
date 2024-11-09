@@ -37,13 +37,13 @@ const ImageSlideshow = ({ images }) => {
   );
 };
 
-// Staggered animation with fade in/out on scroll for MarqueeCard
+
 const MarqueeCard = ({ title, images }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
     if (cardRef.current) {
-      // Set up GSAP animation with ScrollTrigger for each card
+      
       gsap.fromTo(
         cardRef.current,
         { opacity: 0, y: 50 },
@@ -54,10 +54,9 @@ const MarqueeCard = ({ title, images }) => {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: cardRef.current,
-            start: 'top 80%',  // Start animation when the card is 80% from the top of the viewport
-            end: 'top 20%',    // End when the card reaches 20% from the top
-            toggleActions: 'play reverse play reverse', // Replay on scrolling back up
-            scrub: 1, // Smooth transition on scroll (adjust scrub to your liking)
+            start: 'top 80%',  
+            end: 'top 20%',    
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
@@ -77,7 +76,7 @@ const MarqueeCard = ({ title, images }) => {
   );
 };
 
-// Main MarqueeCards component with responsive grid layout and scroll-triggered stagger
+
 export default function MarqueeCards() {
   const [services, setServices] = useState([]);
 
@@ -90,7 +89,7 @@ export default function MarqueeCards() {
   }, []);
 
   useEffect(() => {
-    // Select all cards and apply the staggered fade-in/out effect on scroll
+    
     const cards = document.querySelectorAll('.marquee-card');
     
     if (cards.length > 0) {
@@ -102,13 +101,13 @@ export default function MarqueeCards() {
           y: 0,
           duration: 1,
           ease: 'power2.out',
-          stagger: 0.2,  // Staggered animation between cards
+          stagger: 0.2,  
           scrollTrigger: {
-            trigger: cards[0].parentNode, // Trigger animation based on the parent container
+            trigger: cards[0].parentNode,
             start: 'top 80%',
             end: 'bottom 20%',
-            scrub: 1,  // Smooth scrolling
-            toggleActions: 'play reverse play reverse', // Fade out as you scroll back up
+            scrub: 1,  
+            toggleActions: 'play reverse play reverse', 
           },
         }
       );
@@ -132,7 +131,7 @@ export default function MarqueeCards() {
 
   return (
     <div className="w-full my-24 px-4 lg:px-12">
-      {/* Responsive grid layout for cards */}
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map((card, index) => (
           <MarqueeCard key={`${card.id}-${index}`} title={card.name} images={card.images} />
