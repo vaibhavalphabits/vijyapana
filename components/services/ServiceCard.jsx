@@ -1,27 +1,27 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useRef } from 'react'
-import { Card, CardContent } from "@/components/ui/card"
-import { getServices } from '@/lib/contentful'
-import { Skeleton } from '../ui/skeleton'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useState, useEffect, useRef } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { getServices } from '@/lib/contentful';
+import { Skeleton } from '../ui/skeleton';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 }
 
-// ImageSlideshow component with smaller size and interactive effects
+// ImageSlideshow component
 const ImageSlideshow = ({ images }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [images])
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images]);
 
   return (
     <div className="relative w-full h-[100px] sm:h-[120px] md:h-[150px] lg:h-[180px] overflow-hidden rounded-lg">
@@ -34,59 +34,86 @@ const ImageSlideshow = ({ images }) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-// Individual MarqueeCard with scroll-triggered fade-in and fade-out effects
+// Staggered animation with fade in/out on scroll for MarqueeCard
 const MarqueeCard = ({ title, images }) => {
-  const cardRef = useRef(null)
+  const cardRef = useRef(null);
 
   useEffect(() => {
     if (cardRef.current) {
-      gsap.fromTo(cardRef.current, 
+      // Set up GSAP animation with ScrollTrigger for each card
+      gsap.fromTo(
+        cardRef.current,
         { opacity: 0, y: 50 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 1, 
-          ease: "power2.out", 
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 90%", // Start animation when card enters viewport
-            end: "top 10%",   // End when card reaches near the top
-            toggleActions: "play reverse play reverse", // Trigger fade-in and fade-out
-            // Markers can be added to debug ScrollTrigger behavior
-            // markers: true 
-          }
+            start: 'top 80%',  // Start animation when the card is 80% from the top of the viewport
+            end: 'top 20%',    // End when the card reaches 20% from the top
+            toggleActions: 'play reverse play reverse', // Replay on scrolling back up
+            scrub: 1, // Smooth transition on scroll (adjust scrub to your liking)
+          },
         }
-      )
+      );
     }
-  }, [])
+  }, []);
 
   return (
-    <Card 
-      ref={cardRef} 
-      className="w-full mx-2 my-4 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 hover:z-10"
+    <Card
+      ref={cardRef}
+      className="marquee-card w-full mx-2 my-4 shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 hover:z-10"
     >
       <CardContent className="p-0">
         <ImageSlideshow images={images} />
         <h3 className="text-md font-semibold p-4 text-center uppercase">{title}</h3>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-// Main MarqueeCards component with responsive grid layout
+// Main MarqueeCards component with responsive grid layout and scroll-triggered stagger
 export default function MarqueeCards() {
-  const [services, setServices] = useState([])
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     const fetchServices = async () => {
-      const res = await getServices()
-      setServices(res)
+      const res = await getServices();
+      setServices(res);
+    };
+    fetchServices();
+  }, []);
+
+  useEffect(() => {
+    // Select all cards and apply the staggered fade-in/out effect on scroll
+    const cards = document.querySelectorAll('.marquee-card');
+    
+    if (cards.length > 0) {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out',
+          stagger: 0.2,  // Staggered animation between cards
+          scrollTrigger: {
+            trigger: cards[0].parentNode, // Trigger animation based on the parent container
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1,  // Smooth scrolling
+            toggleActions: 'play reverse play reverse', // Fade out as you scroll back up
+          },
+        }
+      );
     }
-    fetchServices()
-  }, [])
+  }, [services]);
 
   if (services.length === 0) {
     return (
@@ -100,7 +127,7 @@ export default function MarqueeCards() {
           </Card>
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -112,5 +139,5 @@ export default function MarqueeCards() {
         ))}
       </div>
     </div>
-  )
+  );
 }
